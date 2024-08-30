@@ -61,7 +61,3 @@ The report will be saved in the `test-results/` directory.
 ## CI/CD
 
 The project is set up to run on GitHub Actions. The workflow configuration is located in the `.github/workflows/` directory.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
