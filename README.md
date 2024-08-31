@@ -40,6 +40,12 @@ To run the tests, execute the following command:
 npx playwright test
 ```
 
+To run the tests in headed mode, execute the following command:
+
+```zsh
+npx playwright test --headed
+```
+
 To start the interactive UI mode:
 
 ```zsh
