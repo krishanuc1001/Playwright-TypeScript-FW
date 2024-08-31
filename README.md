@@ -40,6 +40,37 @@ To run the tests, execute the following command:
 npx playwright test
 ```
 
+To start the interactive UI mode:
+
+```zsh
+npx playwright test --ui
+```
+
+To run the tests only on Desktop Chrome:
+
+```zsh
+npx playwright test --project=chromium
+```
+
+To run the tests in a specific file:
+
+```zsh
+npx playwright test example
+```
+
+To run the tests in debug mode:
+
+```zsh
+npx playwright test --debug
+```
+
+To auto generate tests with Codegen:
+
+```zsh
+npx playwright codegen
+```
+
+
 ## Writing Tests
 
 The tests are written in TypeScript and are located in the `tests/` directory. The test files have the `.spec.ts` extension.
