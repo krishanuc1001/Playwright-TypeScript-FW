@@ -12,7 +12,7 @@ const {defineConfig, devices} = require('@playwright/test');
  */
 module.exports = defineConfig({
     testDir: './tests',
-    timeout: 30000,
+    timeout: 10000,
     expect: {
         timeout: 5000,
     },
