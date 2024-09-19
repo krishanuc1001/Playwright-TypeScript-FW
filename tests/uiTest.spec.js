@@ -24,10 +24,12 @@ test('Test 1: Handle list of elements | Static Select Drop-down | Radio Button |
     await usernameLocator.fill(username);
     await passwordLocator.fill(password);
 
+    // Handle Dropdown
     await dropDownLocator.selectOption("consult");
+
+    // Handle Radio button
     await userRadioBtn.click();
     await acceptRadioBtn.click();
-
     // Approach 1: Assert whether radio button is checked
     await expect(userRadioBtn).toBeChecked();
     // Approach 2: Assert by returning boolean whether radio button is checked
