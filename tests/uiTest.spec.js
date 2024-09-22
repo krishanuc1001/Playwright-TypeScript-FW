@@ -86,21 +86,6 @@ test('Test 2: Window Handling', async ({browser}) => {
     console.log(await usernameLocator.inputValue());
 });
 
-test('Wait for list of items example 2', async ({browser}) => {
-
-    const context = await browser.newContext();
-    const page = await context.newPage();
-
-    await page.goto("https://rahulshettyacademy.com/client");
-
-    await page.locator("//input[@id='userEmail']").fill("anshika@gmail.com");
-    await page.locator("//input[@id='userPassword']").fill("Iamking@000");
-    await page.locator("//input[@id='login']").click();
-
-    await page.locator("//div[@class='card-body']//b").first().waitFor();
-    console.log(await page.locator("//div[@class='card-body']//b").allTextContents());
-});
-
 test('Saucedemo Test with context', async ({browser}) => {
 
     // This opens a new browser context with plugins/ cookies/ proxies
