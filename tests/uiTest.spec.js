@@ -104,3 +104,33 @@ test('Saucedemo Test with context', async ({browser}) => {
 
     console.log(await page.locator("//div[@data-test='inventory-item-name']").allTextContents());
 });
+
+test("Learn exclusive Playwright Locators", async ({browser}) => {
+
+    const context = await browser.newContext();
+    const page = await context.newPage();
+    const URL = 'https://rahulshettyacademy.com/angularpractice/';
+
+    await page.goto(URL);
+
+    // For Check box, Radio buttons, Dropdowns with labels
+    await page.getByLabel("Check me out if you Love IceCreams!").click();
+    await page.getByLabel("Employed").check();
+    await page.getByLabel("Gender").selectOption("Male");
+
+    // When there ia placeholder attribute for a web element
+    await page.getByPlaceholder("Password").fill("abc123");
+
+    // When there is a button with text, use getByRole
+    await page.getByRole("button", {name: "Submit"}).click();
+
+    // When there is an element with text, use getByText
+    console.log(await page.getByText("Success! The Form has been submitted successfully!.").isVisible());
+
+    await page.getByRole("link", {name: "Shop"}).click();
+
+    await page.locator("//app-card").filter({hasText: 'Nokia Edge'})
+        .getByRole("button", {name: "Add"})
+        .click();
+
+});
