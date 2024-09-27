@@ -134,3 +134,50 @@ test("Learn exclusive Playwright Locators", async ({browser}) => {
         .click();
 
 });
+
+test("Handle Calendar Validations ", async ({browser}) => {
+
+    const context = await browser.newContext();
+    const page = await context.newPage();
+
+    const URL = "https://rahulshettyacademy.com/seleniumPractise";
+    const date = "10";
+    const month = "1";
+    const year = "2027";
+    const expectedList = [month, date, year];
+    const topDeals = page.locator("//a[contains(text(), 'Top Deals')]");
+
+    await page.goto(URL);
+
+    const [newPage] = await Promise.all([
+        context.waitForEvent('page'),
+        topDeals.click()
+    ]);
+
+    expect(await newPage.locator("//div[@class='date-field-container']").isVisible()).toBeTruthy();
+
+    // Open Calendar
+    await newPage.locator("//button[@class='react-date-picker__calendar-button react-date-picker__button']").click();
+
+    // Click on navigation label twice to go to Year selection
+    await newPage.locator("//button[@class='react-calendar__navigation__label']").click()
+    await newPage.locator("//button[@class='react-calendar__navigation__label']").click()
+
+    // Select Year
+    await newPage.getByRole('button', {name: year}).click();
+
+    // Select Month
+    await newPage.locator("//button[contains(@class, 'react-calendar__year-view__months__month')]").nth(Number(month) - 1).click();
+
+    // Select Day
+    await newPage.locator("//abbr[text()='" + date + "']").click();
+
+    // Assertion
+    const inputs = await newPage.locator("//div[@class='react-date-picker__inputGroup']//input");
+
+    for (let i = 0; i < inputs.length; i++) {
+        const value = inputs[i].getAttribute('value');
+        expect(value).toEqual(expectedList[i]);
+    }
+
+});

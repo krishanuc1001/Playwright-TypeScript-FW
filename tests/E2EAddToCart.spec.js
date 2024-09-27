@@ -94,7 +94,7 @@ test("E2E Scenario: Add to Cart", async ({browser}) => {
 
 });
 
-test.only("E2E Scenario: Add to Cart | Special locators", async ({browser}) => {
+test("E2E Scenario: Add to Cart | Special locators", async ({browser}) => {
     const context = await browser.newContext();
     const page = await context.newPage();
     const URL = "https://rahulshettyacademy.com/client";
