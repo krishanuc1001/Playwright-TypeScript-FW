@@ -181,3 +181,59 @@ test("Handle Calendar Validations ", async ({browser}) => {
     }
 
 });
+
+test("Handle Hidden elements", async ({browser}) => {
+
+    const context = await browser.newContext();
+    const page = await context.newPage();
+
+    await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
+
+    await expect(page.locator("//input[@id='displayed-text']")).toBeVisible();
+
+    await page.locator("//input[@id='hide-textbox']").click();
+    await expect(page.locator("//input[@id='displayed-text']")).toBeHidden();
+
+    await page.locator("//input[@id='show-textbox']").click();
+    await expect(page.locator("//input[@id='displayed-text']")).toBeVisible();
+
+});
+
+test("Handle Pop-up Javascript dialog box", async ({browser}) => {
+
+    const context = await browser.newContext();
+    const page = await context.newPage();
+
+    await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
+
+    await page.locator("//input[@id='confirmbtn']").click();
+    page.on('dialog', dialog => dialog.accept());
+
+});
+
+test("Hover and select value", async ({browser}) => {
+
+    const context = await browser.newContext();
+    const page = await context.newPage();
+
+    await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
+
+    await page.locator("//button[@id='mousehover']").hover();
+
+});
+
+test("Handle iframes", async ({browser}) => {
+
+    const context = await browser.newContext();
+    const page = await context.newPage();
+
+    await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
+
+    await page.waitForLoadState('domcontentloaded');
+    const framePage = page.frameLocator("//iframe[@id='courses-iframe']");
+
+    // When there are multiple elements some of which are hidden, using :visible will click on the visible element
+    await framePage.locator("li a[href*='lifetime-access']:visible").click();
+    console.log(await framePage.locator("//*[@class='text']//h2//span").textContent());
+
+});
