@@ -81,6 +81,7 @@ test('Test 2: Window Handling', async ({browser}) => {
 
     const textArray = newPageText.split("@");
     const domain = textArray[1].split(" ")[0];
+    console.log(domain);
 
     await usernameLocator.fill(domain);
     console.log(await usernameLocator.inputValue());
@@ -118,7 +119,7 @@ test("Learn exclusive Playwright Locators", async ({browser}) => {
     await page.getByLabel("Employed").check();
     await page.getByLabel("Gender").selectOption("Male");
 
-    // When there ia placeholder attribute for a web element
+    // When there is a placeholder attribute for a web element
     await page.getByPlaceholder("Password").fill("abc123");
 
     // When there is a button with text, use getByRole
