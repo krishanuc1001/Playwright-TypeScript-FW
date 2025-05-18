@@ -1,4 +1,5 @@
-const {test, expect} = require('@playwright/test');
+// const {test, expect} = require('@playwright/test');
+import { test, expect } from '@playwright/test';
 
 test('Test 1: Handle list of elements | Static Select Drop-down | Radio Button | Check box', async ({browser}) => {
 
@@ -50,12 +51,12 @@ test('Test 1: Handle list of elements | Static Select Drop-down | Radio Button |
 
     const actualPageTitle = await page.title();
     console.log(actualPageTitle);
-    await expect(page).toHaveTitle(expectedPageTitle);
+    await expect(page).toHaveTitle(expectedPageTitle); // Assert page title
 
     // Approach 1: Wait using waitForLoadState method with networkidle
     // await page.waitForLoadState('networkidle');
     // Approach 2: Wait using waitFor method
-    await deviceCardLocators.first().waitFor();
+    await deviceCardLocators.last().waitFor();
     const deviceTitles = await deviceCardLocators.allTextContents();
     console.log(deviceTitles);
 
@@ -72,6 +73,11 @@ test('Test 2: Window Handling', async ({browser}) => {
 
     await page.goto(URL);
 
+    // Question: How to handle new tab/window?
+    // Answer: Use context.waitForEvent('page') to wait for the new page to open
+    // and parallely click on the link to open the new page.
+    // This is a good example of a scenario where we need parallel/ asynchronus events to be handled.
+    // This can be achieved using Promise.all() method.
     const [newPage] = await Promise.all([
         context.waitForEvent('page'),
         documentLink.click()

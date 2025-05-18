@@ -131,7 +131,7 @@ test("E2E Scenario: Add to Cart | Special locators", async ({browser}) => {
     await loginBtn.click();
 
     await products.first().waitFor();
-    // await page.waitForLoadState('networkidle');
+    // await page.waitForLoadState("networkidle");
     await products.filter({hasText: productName})
         .getByRole("button", {name: "Add To Cart"})
         .click();
