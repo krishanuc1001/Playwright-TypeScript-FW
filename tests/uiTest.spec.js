@@ -211,7 +211,7 @@ test("Handle Calendar Validations ", async ({ browser }) => {
 
   // Assertion
   const inputs = newPage.locator(
-      "//div[@class='react-date-picker__inputGroup']//input"
+    "//div[@class='react-date-picker__inputGroup']//input"
   );
 
   for (let i = 0; i < inputs.length; i++) {
@@ -242,7 +242,13 @@ test("Handle Pop-up Javascript dialog box", async ({ browser }) => {
   await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
 
   await page.locator("//input[@id='confirmbtn']").click();
-  page.on("dialog", (dialog) => dialog.accept());
+  page.on("dialog", (dialog) => {
+    console.log(dialog.message());
+    expect(dialog.message()).toEqual(
+      "Hello , Are you sure you want to confirm?"
+    );
+    dialog.accept();
+  });
 });
 
 test("Hover and select value", async ({ browser }) => {
