@@ -238,14 +238,16 @@ test("Handle Hidden elements", async ({ browser }) => {
 test("Handle Pop-up Javascript dialog box", async ({ browser }) => {
   const context = await browser.newContext();
   const page = await context.newPage();
+  const name = "Krishanu";
 
   await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
 
+  await page.locator("//input[@id='name']").fill(name);
   await page.locator("//input[@id='confirmbtn']").click();
   page.on("dialog", (dialog) => {
     console.log(dialog.message());
     expect(dialog.message()).toEqual(
-      "Hello , Are you sure you want to confirm?"
+      "Hello " + name + ", Are you sure you want to confirm?"
     );
     dialog.accept();
   });
