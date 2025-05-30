@@ -28,6 +28,7 @@ class APIUtils {
     //   throw new Error("Failed to log in: " + loginResponse.statusText());
     // }
     const loginResponseJSON = await loginResponse.json();
+    console.log(loginResponseJSON);
     const loginToken = loginResponseJSON.token;
     console.log(loginToken);
     return loginToken;
