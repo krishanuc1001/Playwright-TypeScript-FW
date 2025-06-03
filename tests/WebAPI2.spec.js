@@ -137,8 +137,6 @@ test("E2E Scenario: Print product name", async ({ globalContext }) => {
   await products.first().waitFor();
   await newPage.waitForLoadState("networkidle");
 
-//   const productTitles = await products.allTextContents();
-
   console.log(" ******************** Product Names ********************");
   // Write a for each loop to print each product name using the locator productNames
   const count = await productNames.count();
