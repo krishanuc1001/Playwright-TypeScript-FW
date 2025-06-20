@@ -18,7 +18,16 @@ test.beforeAll("Skip login by fetching token and Create Order", async () => {
 
 // This test will use the token and orderId from the API response to interact with the web application
 // We will verify that the order created via API is visible in the web application
-test("Web and API test with Playwright intercepting API response", async ({ page }) => {
+// The test uses `addInitScript` to set the token in localStorage, allowing the web application to access it as if it was set by the browser.
+
+// Important Note: This test intercepts the API response to simulate a scenario where no orders are returned
+// This is useful for testing how the web application handles such cases.
+// The test uses Playwright's `route` method to intercept the API call and return a custom response.
+// The `fakePayloadWithNoOrders` object is used to simulate the API response when there are no orders.
+
+test("Web and API test with Playwright intercepting API response", async ({
+  page,
+}) => {
   const orders = page.locator("//button[@routerlink='/dashboard/myorders']");
   const noOrders = page.locator("//div[@class = 'mt-4 ng-star-inserted']");
   // Use addInitScript to set the token in localStorage, this allows to use Javascript method window.localStorage.setItem
@@ -48,5 +57,7 @@ test("Web and API test with Playwright intercepting API response", async ({ page
   console.log(await noOrders.textContent());
 
   // Verify that the text content of the noOrders element matches the expected message
-  expect(await noOrders.textContent()).toContain(fakePayloadWithNoOrders.message);
+  expect(await noOrders.textContent()).toContain(
+    fakePayloadWithNoOrders.message
+  );
 });
