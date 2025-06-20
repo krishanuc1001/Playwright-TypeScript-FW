@@ -46,4 +46,7 @@ test("Web and API test with Playwright intercepting API response", async ({ page
     "https://rahulshettyacademy.com/api/ecom/order/get-orders-for-customer/*"
   );
   console.log(await noOrders.textContent());
+
+  // Verify that the text content of the noOrders element matches the expected message
+  expect(await noOrders.textContent()).toContain(fakePayloadWithNoOrders.message);
 });
