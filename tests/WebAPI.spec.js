@@ -44,6 +44,4 @@ test("Web and API test with Playwright", async ({ page }) => {
 
   const orderIdDetails = await orderSummaryOrderID.textContent();
   expect(response.orderId.includes(orderIdDetails)).toBeTruthy();
-
-  await orders.click();
 });
