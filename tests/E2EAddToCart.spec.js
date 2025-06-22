@@ -134,7 +134,7 @@ test("E2E Scenario: Add to Cart | Special locators", async ({ browser }) => {
   );
   const selectCountry = page.getByPlaceholder("Select Country");
 
-  const orderHistoryPage = page.locator(
+  const orders = page.locator(
     "//td[@class='em-spacer-1']//label[@routerlink='/dashboard/myorders']"
   );
   const checkoutBtn = page.getByRole("button", { name: "Checkout" });
@@ -195,7 +195,7 @@ test("E2E Scenario: Add to Cart | Special locators", async ({ browser }) => {
   const orderID = await orderIDLocator.textContent();
   console.log(orderID);
 
-  await orderHistoryPage.click();
+  await orders.click();
   await page.locator("//tbody").waitFor();
 
   for (let i = 0; i < (await rows.count()); i++) {
